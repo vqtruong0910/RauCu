@@ -17,7 +17,9 @@ public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+
+
     @Column(name = "user_name")
     private String userName;
     
@@ -76,5 +78,7 @@ public class User {
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
-    
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

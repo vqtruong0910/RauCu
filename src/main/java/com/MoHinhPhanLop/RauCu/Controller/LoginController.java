@@ -9,7 +9,6 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String loginPage(Model model) {
-		model.addAttribute("message","Xin chao cac ban");
-		return "/login";
+		return "home";
 	}
 }
