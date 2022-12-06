@@ -1,28 +1,247 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layouts/default}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://thymeleaf.org"
+  layout:decorate="~{layouts/default}">
+
 <head>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+  <style>
+    .content {}
+
+    .content__item {
+      width: 100px;
+      height: 300px;
+      margin-bottom: 20px;
+    }
+
+    .item__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform .2s;
+    }
+
+    .item__img:hover {
+      transform: scale(1.1);
+    }
+
+    .item__title {
+      color: black;
+    }
+
+    .slick-initialized .slick-slide {
+      margin: 30px 10px 80px 10px;
+    }
+
+    .slick-prev {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      padding: 20px;
+      color: white;
+      background-color: black;
+      border-radius: 50%;
+      left: -50px;
+    }
+
+    .slick-prev:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .slick-next:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .slick-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      padding: 20px;
+      color: white;
+      background-color: black;
+      right: -50px;
+      border-radius: 50%;
+    }
+
+    .content__title {
+      color: red;
+      margin-top: 17px;
+    }
+
+    hr {
+      border: 1px solid blue;
+    }
+
+    .price a {
+      text-decoration: none;
+      color: #0062cc;
+    }
+
+    .price a:hover {
+      opacity: 0.8;
+    }
+
+    .main__slider {
+      height: 500px;
+    }
+
+    .main__slider--img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slick-slide {
+      height: 500px;
+      border-radius: 12px;
+    }
+
+    .wrap__content {
+      margin-top: 50px;
+    }
+  </style>
 </head>
+
+<!-- xmlns:th="http://www.w3.org/1999/xhtml" -->
+
 <body>
   <div align="center" layout:fragment="content">
-    <table border="1" cellpadding="10">
-      <thead>
-      <tr>
-        <th>User ID</th>
-        <th>User Name</th>
-        <th>Phone Number</th>
-        <th>Address</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="user : ${listUsers}">
-        <td th:text="${user.id}">User ID</td>
-        <td th:text="${user.userName}">User Name</td>
-        <td th:text="${user.phoneNumber}">Phone Number</td>
-        <td th:text="${user.address}">address</td>
-      </tr>
-      </tbody>
-    </table>
+
+    <div class="main__slider">
+      <img
+        src="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dmVnYXRhYmxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+        alt="" class="main__slider--img">
+      <img
+        src="https://media.istockphoto.com/id/1373540444/photo/woman-holding-wicker-basket-full-of-fresh-vegetables-on-black-background-closeup.jpg?b=1&s=170667a&w=0&k=20&c=RauckVN7gVaTItE1QH3-T1LMALgiFioQMR-5pjCEneQ="
+        alt="" class="main__slider--img">
+      <img
+        src="https://media.istockphoto.com/id/1305410386/photo/still-life-of-vegetables-with-dark-background.jpg?b=1&s=170667a&w=0&k=20&c=7zYZ0zwV_P33yNqPdACkV1odFoHdtAnmeppxj0-C_VU="
+        alt="" class="main__slider--img">
+    </div>
+    <div class="wrap__content">
+      <h2 class="content__title">Bán Chạy</h2>
+      <div class="content">
+        <div class="content__item" th:each="product:${listProducts}">
+          <img
+            src="https://images.unsplash.com/photo-1629318682484-e77bbbdf8283?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img" th:src="@{'/img/'+${product.image}}">
+          <h3 class="item__title" th:text="${product.name}">Bông Cải Xanh</h3>
+          <h4 class="price">Giá
+            <span th:text="${product.price}+VND">20.000VND</span>
+            <a href="./index2.html"> <i class="fa-solid fa-cart-shopping"></i></a>
+          </h4>
+        </div>
+        <!-- <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1599145566106-fa02aafba0b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Hành Tím</h3>
+        </div>
+        <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1527619635633-2f162c423935?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Ớt hiểm</h3>
+        </div>
+        <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1578167637694-5a5c45d5a322?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Củ Hành</h3>
+        </div>
+        <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1646925707676-d2db5b4adde0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHZlZ2F0YWJsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Cà Tím</h3>
+        </div> -->
+
+      </div>
+    </div>
+    <hr>
+    <div class="wrap__content">
+      <h2 class="content__title">Danh Mục</h2>
+      <div class="content_category">
+        <div class="content__item" th:each ="category: ${listCategorys}">
+          <img
+            src="/img/rau1.jpg"
+            alt="" class="item__img" th:src="@{/img/rau1.jpg}"/>
+          <h3 class="item__title" th:text="${category.name}">products</h3>
+        </div>
+<!--        <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1599145566106-fa02aafba0b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Hành Tím</h3>
+        </div>
+        <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1527619635633-2f162c423935?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Ớt hiểm</h3>
+        </div>
+        <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1578167637694-5a5c45d5a322?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Củ Hành</h3>
+        </div>
+        <div class="content__item">
+          <img
+            src="https://images.unsplash.com/photo-1646925707676-d2db5b4adde0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHZlZ2F0YWJsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+            alt="" class="item__img">
+          <h3 class="item__title">Cà Tím</h3>
+        </div>-->
+
+      </div>
+    </div>
+    <hr>
+   
+    <script>
+      $(document).ready(function () {
+        $('.content').slick({
+          slidesToShow: 4,
+          infinity: true,
+          prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+          nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+        });
+      });
+      $(document).ready(function () {
+        $('.main__slider').slick({
+          slidesToShow: 1,
+          prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+          nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+        });
+      });
+      $(document).ready(function () {
+        $('.content_category').slick({
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+          nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+        });
+      });
+      $(document).ready(function () {
+        $('.content__promotional').slick({
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+          nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
+        });
+      });
+    </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   </div>
+
+
 </body>
+
 </html>
