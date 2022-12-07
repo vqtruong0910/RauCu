@@ -19,6 +19,7 @@ public class Category {
 	
 	private String name;
 	
+	private String image;
 	@OneToMany(mappedBy = "category")
 	private Set<Product> products;
 
@@ -28,6 +29,14 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Set<Product> getProducts() {

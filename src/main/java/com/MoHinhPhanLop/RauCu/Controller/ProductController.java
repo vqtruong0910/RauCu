@@ -37,7 +37,7 @@ public class ProductController {
         ArrayList<OrderDetail> cart = null;
         if(session.getAttribute("cart") == null){
             cart = new ArrayList<>();
-            Product product = productService.find(id).get();
+            Product product = productService.get(id);
             OrderDetail orderDetail = new OrderDetail(product.getPrice(),product.getPrice(),1,product);
             cart.add(orderDetail);
             session.setAttribute("cart",cart);
@@ -46,7 +46,7 @@ public class ProductController {
             cart = (ArrayList<OrderDetail>) session.getAttribute("cart");
             int index = this.exitst(id,cart);
             if(index == -1){
-               Product product = productService.find(id).get();
+               Product product = productService.get(id);
                 cart.add(new OrderDetail(product.getPrice(),product.getPrice(),1,product));
             }
             else{
