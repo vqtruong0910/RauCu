@@ -12,9 +12,13 @@
     .content {}
 
     .content__item {
-      width: 100px;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       margin-bottom: 20px;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     .item__img {
@@ -127,7 +131,7 @@
     <div class="wrap__content">
       <h2 class="content__title">Bán Chạy</h2>
       <div class="content">
-        <div class="content__item" th:each="product:${listProducts}">
+        <div class="content__item" th:each="product:${listSelling}">
           <img
             src="https://images.unsplash.com/photo-1629318682484-e77bbbdf8283?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
             alt="" class="item__img" th:src="@{'/img/'+${product.image}}">
@@ -168,13 +172,13 @@
     <div class="wrap__content">
       <h2 class="content__title">Danh Mục</h2>
       <div class="content_category">
-        <div class="content__item" th:each ="category: ${listCategorys}">
-          <img
-            src="/img/rau1.jpg"
-            alt="" class="item__img" th:src="@{/img/rau1.jpg}"/>
-          <h3 class="item__title" th:text="${category.name}">products</h3>
-        </div>
-<!--        <div class="content__item">
+        <a th:each="category: ${listCategorys} " href="" th:href="@{/index3(keyword=${category.name})}">
+          <div class="content__item">
+            <img src="/img/rau1.jpg" alt="" class="item__img" th:src="@{'/img/'+${category.image}}" />
+            <h3 class="item__title" th:text="${category.name}">products</h3>
+          </div>
+        </a>
+        <!--        <div class="content__item">
           <img
             src="https://images.unsplash.com/photo-1599145566106-fa02aafba0b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dmVnYXRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
             alt="" class="item__img">
@@ -202,7 +206,7 @@
       </div>
     </div>
     <hr>
-   
+
     <script>
       $(document).ready(function () {
         $('.content').slick({

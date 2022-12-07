@@ -12,6 +12,7 @@ import com.MoHinhPhanLop.RauCu.Service.ProductService;
 import com.MoHinhPhanLop.RauCu.Service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,31 @@ public class CategoryController {
      private ProductService productService;
 
     @RequestMapping("/index")
-    public String viewHomePage(Model model) {
+    public String viewHomePage(Model model, @Param("keyword")String keyword) {
         List<Category> listCategory = categoryService.listAll();
-        List<Product> listProduct = productService.listAll();
+        List<Product> listProduct = productService.listAll(keyword);
+        List<Product> listSelling = productService.listAllSelling();
         model.addAttribute("listCategorys", listCategory);
         model.addAttribute("listProducts",listProduct);
+        model.addAttribute("listSelling",listSelling);
+//        model.addAttribute("keyword",keyword);
         return "index";
     }
     
+    @RequestMapping("/index2")
+    public String index2(Model model, @Param("keyword")String keyword) {
+        List<Product> listProduct = productService.listAll(keyword);
+        model.addAttribute("listProducts",listProduct);
+        model.addAttribute("keyword",keyword);
+        return "index2";
+    }
+    
+    
+    @RequestMapping("/index3")
+    public String index3(Model model, @Param("keyword")String keyword) {
+        List<Product> listProduct = productService.listAllCategory(keyword);
+        model.addAttribute("listProducts",listProduct);
+        model.addAttribute("keyword",keyword);
+        return "index3";
+    }
 }
