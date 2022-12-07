@@ -22,12 +22,12 @@ public class OrderDetail {
 	
 	private int quantity;
 	
-	@ManyToOne 
-    @JoinColumn(name = "order_id")
-    private Order order;
-	
-	@ManyToOne 
-    @JoinColumn(name = "product_id")
+////	@ManyToOne
+////    @JoinColumn(name = "order_id",nullable = false)
+//    private Order order;
+//
+	@ManyToOne
+    @JoinColumn(name = "product_id",nullable = false)
     private Product product;
 
 	public Double getAmount() {
@@ -54,13 +54,13 @@ public class OrderDetail {
 		this.quantity = quantity;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+//	public Order getOrder() {
+//		return order;
+//	}
+//
+//	public void setOrder(Order order) {
+//		this.order = order;
+//	}
 
 	public Product getProduct() {
 		return product;
@@ -73,5 +73,14 @@ public class OrderDetail {
 	public Long getId() {
 		return id;
 	}
-	
+
+	public OrderDetail(Double amount, Double price, int quantity,Product product) {
+		this.amount = amount;
+		this.price = price;
+		this.quantity = quantity;
+		this.product = product;
+	}
+
+	public OrderDetail() {
+	}
 }
