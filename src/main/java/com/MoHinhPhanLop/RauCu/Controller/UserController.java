@@ -15,14 +15,6 @@ import java.util.*;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @RequestMapping("/")
-    public String viewHomePage(Model model) {
-        List<User> listUsers = userService.listAll();
-
-        model.addAttribute("listUsers", listUsers);
-        return "index";
-    }
     @RequestMapping("/listOrder")
     public String listOrderById(){
         Set<Order> orders = new HashSet<>();

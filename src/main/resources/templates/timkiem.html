@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://thymeleaf.org"
+    layout:decorate="~{layouts/default}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" <title>
+    <title>Document</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .product__item {
+            flex: 0 0 33%;
+            margin: 80px 0;
+        }
+
+        .product__item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform .2s;
+        }
+
+        .product__item-img:hover {
+            transform: scale(1.1);
+        }
+
+        .product__item-title {
+            font-size: 26px;
+            color: black;
+        }
+
+        .price a {
+            text-decoration: none;
+            color: #0062cc;
+        }
+
+        .price a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div align="center" layout:fragment="content">
+        <h3 th:text="'Kết quả tìm kiếm ' +${keyword}"></h3>
+        <div class="product-list">
+            <div class="product__item" th:each="product : ${listProducts}">
+                <img src="" alt="" class="product__item-img" th:src="@{'/img/'+${product.image}}">
+                <h3 class="product__item-title" th:text="${product.name}">asdb</h3>
+                <h4 class="price">Giá
+                    <span th:text="${product.price}+VND">20.000VND</span>
+                    <a href="#"> <i class="fa-solid fa-cart-shopping"></i></a>
+                </h4>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

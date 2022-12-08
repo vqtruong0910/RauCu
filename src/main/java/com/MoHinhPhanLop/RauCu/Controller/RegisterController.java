@@ -43,6 +43,6 @@ public class RegisterController {
 		String hashCode = UserService.bytesToHex(encodedhash);
 		user.setPassword(hashCode);
 		userService.save(user);
-		return "redirect:/";
+		return "redirect:/index";
 	}
 }

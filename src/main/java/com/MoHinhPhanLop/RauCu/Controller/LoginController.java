@@ -26,12 +26,12 @@ public class LoginController {
 	private UserService userService;
 	
 
-	@GetMapping
+	@GetMapping()
 	public String loginPage() {
 		return "login";
 	}
 	
-	@PostMapping
+	@PostMapping()
 	public String submitLogin(@ModelAttribute("user") User user,Model model, HttpSession session) throws NoSuchAlgorithmException {
 		List<User> users = userService.listAll();
 		String nameUser = user.getUserName();
@@ -43,7 +43,7 @@ public class LoginController {
 		for (User us : users) {
 			if(us.getUserName().equals(nameUser) && us.getPassword().equals(hashCode)) {
 				session.setAttribute("user", user);
-				return "redirect:/";				
+				return "redirect:/index";
 			}
 		}
 		model.addAttribute("message", "Account or password does not match");

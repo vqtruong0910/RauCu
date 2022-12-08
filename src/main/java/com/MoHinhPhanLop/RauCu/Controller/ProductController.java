@@ -21,11 +21,11 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping("/home")
+    @RequestMapping("/sanpham")
     public String viewHome(Model model){
-        List<Product> productLists = productService.listAll();
+        List<Product> productLists = productService.products();
         model.addAttribute("listProducts",productLists);
-        return "home";
+        return "sanpham";
     }
 
     @RequestMapping("/cart")

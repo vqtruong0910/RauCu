@@ -12,11 +12,31 @@ import java.util.Optional;
 public class ProductService {
 
     @Autowired
-    ProductRepository productRepository;
-    public List<Product> listAll(){
-        System.out.println(productRepository.findAll());
+    private ProductRepository productRepository;
+
+    public List<Product> products(){
         return (List<Product>) productRepository.findAll();
     }
+    public List<Product> listAll(String keyword){
+        if(keyword!=null) {
+            System.out.println(productRepository.search(keyword));
+             return (List<Product>) productRepository.search(keyword);
+        }
+        return (List<Product>) productRepository.findAll();
+    }
+    
+    public List<Product> listAllCategory(String keyword){
+        if(keyword!=null){
+            return (List<Product>) productRepository.searchCategory(keyword);
+        } 
+        return (List<Product>) productRepository.findAll();
+    }
+    
+    public List<Product> listAllSelling() {
+        return (List<Product>) productRepository.searchSelling();
+    }
+    
+    
     public void save(Product product){
         productRepository.save(product);
     }

@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class OrderController {
@@ -23,10 +20,20 @@ public class OrderController {
     @PostMapping("/addOrder")
     public String addOrder(HttpSession session){
         Order order = new Order();
+        Double amount = 0.0;
         Set<OrderDetail> orderDetails = new HashSet<>((ArrayList<OrderDetail> )session.getAttribute("cart"));
+        if(orderDetails == null) return "redirect:/cart";
+        Iterator<OrderDetail> itr = orderDetails.iterator();
+        while(itr.hasNext()){
+            amount += itr.next().getAmount();
+        }
+        User user = (User) session.getAttribute("user");
+        if(user == null) return "redirect:/login";
+        order.setUser(user);
         order.setOrderDetails(orderDetails);
+        order.setAmount(amount);
         orderService.addOrder(order);
         session.setAttribute("cart", null);
-        return "redirect:/home";
+        return "redirect:/cart";
     }
 }
