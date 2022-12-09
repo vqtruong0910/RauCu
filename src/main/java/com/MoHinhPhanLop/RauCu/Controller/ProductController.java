@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     @RequestMapping("/cart")
-    public String viewCart(){
+    public String viewCart(HttpSession session){
         return "cart";
     }
     @RequestMapping("/cart/{id}")

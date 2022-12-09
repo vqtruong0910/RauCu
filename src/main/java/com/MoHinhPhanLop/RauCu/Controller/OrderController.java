@@ -6,6 +6,7 @@ import com.MoHinhPhanLop.RauCu.Entity.User;
 import com.MoHinhPhanLop.RauCu.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -18,11 +19,14 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/addOrder")
-    public String addOrder(HttpSession session){
+    public String addOrder(HttpSession session,Model model){
         Order order = new Order();
         Double amount = 0.0;
+        if(session.getAttribute("cart") == null){
+            model.addAttribute("message","Giỏ hàng trống");
+            return "cart";
+        }
         Set<OrderDetail> orderDetails = new HashSet<>((ArrayList<OrderDetail> )session.getAttribute("cart"));
-        if(orderDetails == null) return "redirect:/cart";
         Iterator<OrderDetail> itr = orderDetails.iterator();
         while(itr.hasNext()){
             amount += itr.next().getAmount();
@@ -34,6 +38,7 @@ public class OrderController {
         order.setAmount(amount);
         orderService.addOrder(order);
         session.setAttribute("cart", null);
-        return "redirect:/cart";
+        model.addAttribute("message","Đặt hàng thành công");
+        return "cart";
     }
 }
