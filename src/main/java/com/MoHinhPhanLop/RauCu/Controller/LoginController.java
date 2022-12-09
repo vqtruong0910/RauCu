@@ -20,18 +20,17 @@ import com.MoHinhPhanLop.RauCu.Service.UserService;
 
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 	@Autowired
 	private UserService userService;
 	
 
-	@GetMapping()
+	@GetMapping("/login")
 	public String loginPage() {
 		return "login";
 	}
 	
-	@PostMapping()
+	@PostMapping("/login")
 	public String submitLogin(@ModelAttribute("user") User user,Model model, HttpSession session) throws NoSuchAlgorithmException {
 		List<User> users = userService.listAll();
 		String nameUser = user.getUserName();
@@ -48,5 +47,11 @@ public class LoginController {
 		}
 		model.addAttribute("message", "Account or password does not match");
 		return "login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/login";
 	}
 }
