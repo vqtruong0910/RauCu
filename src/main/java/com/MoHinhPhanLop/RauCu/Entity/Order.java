@@ -2,14 +2,7 @@ package com.MoHinhPhanLop.RauCu.Entity;
 
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "`order`")
@@ -21,10 +14,11 @@ public class Order {
 	
 	private Double amount;
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name="order_id",referencedColumnName = "id")
 	private Set<OrderDetail> orderDetails;
 	
-	@ManyToOne 
+	@ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -50,5 +44,9 @@ public class Order {
 
 	public User getUser() {
 		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

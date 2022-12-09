@@ -110,6 +110,7 @@
       margin-top: 50px;
     }
 
+
     </style>
 </head>
 
@@ -117,47 +118,6 @@
 
 <body>
 <div align="center" layout:fragment="content">
-    <div class="main__slider">
-        <img
-                src="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dmVnYXRhYmxlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                alt="" class="main__slider--img">
-        <img
-                src="https://media.istockphoto.com/id/1373540444/photo/woman-holding-wicker-basket-full-of-fresh-vegetables-on-black-background-closeup.jpg?b=1&s=170667a&w=0&k=20&c=RauckVN7gVaTItE1QH3-T1LMALgiFioQMR-5pjCEneQ="
-                alt="" class="main__slider--img">
-        <img
-                src="https://media.istockphoto.com/id/1305410386/photo/still-life-of-vegetables-with-dark-background.jpg?b=1&s=170667a&w=0&k=20&c=7zYZ0zwV_P33yNqPdACkV1odFoHdtAnmeppxj0-C_VU="
-                alt="" class="main__slider--img">
-    </div>
-    <div class="wrap__content">
-        <h2 class="content__title">Bán Chạy</h2>
-        <div class="content">
-            <div class="content__item" th:each="product:${listSelling}">
-                <img
-                        alt="" class="item__img" th:src="@{'/img/'+${product.image}}">
-                <h3 class="item__title" th:text="${product.name}"></h3>
-                <h4 class="price">Giá
-                    <span th:text="${product.price}+VND"></span>
-                    <a th:href="@{/cart/{id}(id=${product.id})}"> <i class="fa-solid fa-cart-shopping"></i></a>
-                </h4>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="wrap__content">
-        <h2 class="content__title">Sản Phẩm</h2>
-        <div class="content">
-            <div class="content__item" th:each="product:${listProducts}">
-                <img
-                        alt="" class="item__img" th:src="@{'/img/'+${product.image}}">
-                <h3 class="item__title" th:text="${product.name}"></h3>
-                <h4 class="price">Giá
-                    <span th:text="${product.price}+VND"></span>
-                    <a th:href="@{/cart/{id}(id=${product.id})}"> <i class="fa-solid fa-cart-shopping"></i></a>
-                </h4>
-            </div>
-        </div>
-    </div>
-    <hr>
     <div class="wrap__content">
         <h2 class="content__title">Danh Mục</h2>
         <div class="content_category">
@@ -170,7 +130,6 @@
         </div>
     </div>
     <hr>
-
     <script>
       $(document).ready(function () {
         $('.content').slick({
@@ -203,6 +162,7 @@
           nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>"
         });
       });
+
 
     </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>

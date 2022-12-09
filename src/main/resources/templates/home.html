@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layouts/default}">
+<head>
+</head>
+<body>
+<div align="center" layout:fragment="content">
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category_Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${listProducts}">
+            <td th:text="${product.id}">product id</td>
+            <td><img th:src="@{${product.image}}" class="img-fluid rounded-3" alt=""></td>
+            <td th:text="${product.name}">product name</td>
+            <td th:text="${product.price}">product price</td>
+            <td th:text="${product.category.id}">category_id</td>
+            <td>
+<!--                /{id}(id=${product.id})}-->
+                <a th:href="@{/cart/{id}(id=${product.id})}">add to cart</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

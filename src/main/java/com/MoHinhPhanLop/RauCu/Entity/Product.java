@@ -82,5 +82,13 @@ public class Product {
 	public void setOrderDetail(Set<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
-	
+
+	public Product(String image, String name, Double price, Category category) {
+		this.image = image;
+		this.name = name;
+		this.price = price;
+		this.category = category;
+	}
+	public Product() {
+	}
 }
