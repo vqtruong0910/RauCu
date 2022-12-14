@@ -32,12 +32,14 @@ public class OrderController {
             amount += itr.next().getAmount();
         }
         User user = (User) session.getAttribute("user");
+
         if(user == null) return "redirect:/login";
+        System.out.println("User id:"+ user.getId());
         order.setUser(user);
         order.setOrderDetails(orderDetails);
         order.setAmount(amount);
         orderService.addOrder(order);
-        session.setAttribute("cart", null);
+        session.removeAttribute("cart");
         model.addAttribute("message","Đặt hàng thành công");
         return "cart";
     }

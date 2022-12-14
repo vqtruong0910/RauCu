@@ -41,7 +41,7 @@ public class LoginController {
 		String hashCode = UserService.bytesToHex(encodedhash);
 		for (User us : users) {
 			if(us.getUserName().equals(nameUser) && us.getPassword().equals(hashCode)) {
-				session.setAttribute("user", user);
+				session.setAttribute("user", us);
 				return "redirect:/index";
 			}
 		}

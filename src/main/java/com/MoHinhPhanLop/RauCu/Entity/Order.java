@@ -18,7 +18,7 @@ public class Order {
 	@JoinColumn(name="order_id",referencedColumnName = "id")
 	private Set<OrderDetail> orderDetails;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private User user;
 

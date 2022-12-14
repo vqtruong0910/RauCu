@@ -6,6 +6,7 @@ package com.MoHinhPhanLop.RauCu.Controller;
 
 import com.MoHinhPhanLop.RauCu.Entity.Category;
 import com.MoHinhPhanLop.RauCu.Entity.Product;
+import com.MoHinhPhanLop.RauCu.Entity.User;
 import com.MoHinhPhanLop.RauCu.Service.CategoryService;
 import com.MoHinhPhanLop.RauCu.Service.ProductService;
 import java.util.List;
@@ -14,6 +15,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,6 +29,11 @@ public class CategoryController {
     
     @Autowired
      private ProductService productService;
+
+    @RequestMapping("/")
+    public String index(){
+        return "redirect:/index";
+    }
 
     @RequestMapping("/index")
     public String viewHomePage(Model model) {
